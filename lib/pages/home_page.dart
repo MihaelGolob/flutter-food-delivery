@@ -6,10 +6,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        backgroundColor: theme.tertiary,
       ),
+      backgroundColor: theme.surface,
       drawer: DoveDrawer(),
     );
   }
