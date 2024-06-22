@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/components/dove_button.dart';
 import 'package:food_delivery/components/dove_text_field.dart';
 
-class LoginPage extends StatefulWidget {
-  final void Function()? onTapRegister;
+class RegisterPage extends StatefulWidget {
+  final void Function()? onTapLogin;
 
-  const LoginPage({super.key, this.onTapRegister});
+  const RegisterPage({super.key, this.onTapLogin});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // text editing controllers
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
 
             // message
             Text(
-              "DoveLivery",
-              style: TextStyle(fontSize: 25, color: theme.inversePrimary),
+              "Let's create an account for you",
+              style: TextStyle(fontSize: 20, color: theme.inversePrimary),
             ),
             const SizedBox(height: 25),
 
@@ -52,24 +52,31 @@ class _LoginPageState extends State<LoginPage> {
               hintText: 'Password',
               obscureText: true,
             ),
-            const SizedBox(height: 25),
-
-            // sign in button
-            DoveButton(text: 'Sign In', onTap: () {}),
             const SizedBox(height: 10),
 
-            // sign up text
+            DoveTextField(
+              controller: confirmPasswordController,
+              hintText: 'Confirm password',
+              obscureText: true,
+            ),
+            const SizedBox(height: 25),
+
+            // sign up button
+            DoveButton(text: 'Sign up', onTap: () {}),
+            const SizedBox(height: 10),
+
+            // go to login text
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Not a member? ',
+                  'Already have an account? ',
                   style: TextStyle(color: theme.inversePrimary),
                 ),
                 GestureDetector(
-                  onTap: widget.onTapRegister,
+                  onTap: widget.onTapLogin,
                   child: Text(
-                    'Register now',
+                    'Login here.',
                     style: TextStyle(
                       color: theme.inversePrimary,
                       fontWeight: FontWeight.bold,
