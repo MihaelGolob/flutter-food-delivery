@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/dove_button.dart';
 import 'package:food_delivery/components/dove_text_field.dart';
+import 'package:food_delivery/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTapRegister;
@@ -14,8 +15,17 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
+
+  void signIn() {
+    // todo: auth
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 25),
 
             // sign in button
-            DoveButton(text: 'Sign In', onTap: () {}),
+            DoveButton(text: 'Sign In', onTap: signIn),
             const SizedBox(height: 10),
 
             // sign up text
