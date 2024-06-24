@@ -11,7 +11,7 @@ class DoveSliverAppBar extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
 
     return SliverAppBar(
-      title: title,
+      title: const Text('Title'),
       backgroundColor: theme.surface,
       foregroundColor: theme.inversePrimary,
       expandedHeight: 340,
