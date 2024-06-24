@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/components/dove_current_location.dart';
+import 'package:food_delivery/components/dove_description_box.dart';
+import 'package:food_delivery/components/dove_sliver_app_bar.dart';
 import 'package:food_delivery/components/drawer/dove_drawer.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,12 +12,22 @@ class HomePage extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        backgroundColor: theme.tertiary,
-      ),
-      backgroundColor: theme.surface,
-      drawer: DoveDrawer(),
-    );
+        drawer: const DoveDrawer(),
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScroller) => [
+            DoveSliverAppBar(
+              title: const Text('title'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Divider(indent: 25, endIndent: 25, color: theme.secondary),
+                  DoveCurrentLocation(),
+                  DoveDescriptionBox(),
+                ],
+              ),
+            ),
+          ],
+          body: Container(color: Colors.blue),
+        ));
   }
 }
