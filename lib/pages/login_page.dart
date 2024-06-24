@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/components/dove_button.dart';
-import 'package:food_delivery/components/dove_text_field.dart';
+import 'package:food_delivery/components/general/dove_button.dart';
+import 'package:food_delivery/components/general/dove_text_field.dart';
 import 'package:food_delivery/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {

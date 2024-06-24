@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/components/dove_current_location.dart';
-import 'package:food_delivery/components/dove_description_box.dart';
-import 'package:food_delivery/components/dove_sliver_app_bar.dart';
-import 'package:food_delivery/components/dove_tab_bar.dart';
+import 'package:food_delivery/components/main/dove_current_location.dart';
+import 'package:food_delivery/components/main/dove_description_box.dart';
+import 'package:food_delivery/components/main/dove_sliver_app_bar.dart';
+import 'package:food_delivery/components/main/dove_tab_bar.dart';
 import 'package:food_delivery/components/drawer/dove_drawer.dart';
+import 'package:food_delivery/models/food_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: FoodCategory.values.length, vsync: this);
   }
 
   @override
@@ -41,8 +42,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Divider(indent: 25, endIndent: 25, color: theme.secondary),
-                  DoveCurrentLocation(),
-                  DoveDescriptionBox(),
+                  const DoveCurrentLocation(),
+                  const DoveDescriptionBox(),
                 ],
               ),
             ),
@@ -53,6 +54,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               Text('Hello 1'),
               Text('Hello 2'),
               Text('Hello 3'),
+              Text('Hello 4'),
+              Text('Hello 5'),
             ],
           ),
         ));
