@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/components/food_tile.dart';
 import 'package:food_delivery/components/main/dove_current_location.dart';
 import 'package:food_delivery/components/main/dove_description_box.dart';
 import 'package:food_delivery/components/main/dove_sliver_app_bar.dart';
 import 'package:food_delivery/components/main/dove_tab_bar.dart';
 import 'package:food_delivery/components/drawer/dove_drawer.dart';
 import 'package:food_delivery/models/food_model.dart';
+import 'package:food_delivery/models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +31,21 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     super.dispose();
   }
 
+  List<Widget> getFoodByCategory(Restaurant restaurant) {
+    return FoodCategory.values.map((category) {
+      final categoryMenu = restaurant.getMenuByCategory(category);
+
+      return ListView.builder(
+        itemCount: categoryMenu.length,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(0),
+        itemBuilder: (context, index) {
+          return FoodTile(food: categoryMenu[index], onTap: () {});
+        },
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
@@ -48,15 +66,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
             ),
           ],
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              Text('Hello 1'),
-              Text('Hello 2'),
-              Text('Hello 3'),
-              Text('Hello 4'),
-              Text('Hello 5'),
-            ],
+          body: Consumer<Restaurant>(
+            builder: (context, restaurant, child) => TabBarView(
+              controller: _tabController,
+              children: getFoodByCategory(restaurant),
+            ),
           ),
         ));
   }
