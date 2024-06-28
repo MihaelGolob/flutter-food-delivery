@@ -7,6 +7,7 @@ import 'package:food_delivery/components/main/dove_tab_bar.dart';
 import 'package:food_delivery/components/drawer/dove_drawer.dart';
 import 'package:food_delivery/models/food_model.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/pages/food_details_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +41,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(0),
         itemBuilder: (context, index) {
-          return FoodTile(food: categoryMenu[index], onTap: () {});
+          return FoodTile(
+            food: categoryMenu[index],
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodDetailsPage(food: categoryMenu[index]),
+              ),
+            ),
+          );
         },
       );
     }).toList();
