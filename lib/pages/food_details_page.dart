@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/general/dove_button.dart';
 import 'package:food_delivery/models/food_model.dart';
+import 'package:food_delivery/models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   final FoodModel food;
@@ -17,6 +19,19 @@ class FoodDetailsPage extends StatefulWidget {
 }
 
 class _FoodDetailsPageState extends State<FoodDetailsPage> {
+  void addToCart(FoodModel food, Map<FoodAddonModel, bool> selectedAddons) {
+    List<FoodAddonModel> addons = [];
+    for (var addon in selectedAddons.entries) {
+      if (addon.value) {
+        addons.add(addon.key);
+      }
+    }
+
+    context.read<Restaurant>().addFoodToCart(food, addons, 1);
+
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
@@ -67,10 +82,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 ),
 
                 // add to cart button
-                DoveButton(
-                  text: 'Add to cart',
-                  onTap: () {},
-                ),
+                DoveButton(text: 'Add to cart', onTap: () => addToCart(widget.food, widget.selectedAddons)),
 
                 const SizedBox(height: 20),
               ],

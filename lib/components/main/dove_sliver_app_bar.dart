@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/cart_page.dart';
 
 class DoveSliverAppBar extends StatelessWidget {
   final Widget child;
@@ -20,8 +21,8 @@ class DoveSliverAppBar extends StatelessWidget {
       pinned: true,
       actions: [
         IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {},
+          icon: const Icon(Icons.shopping_cart_outlined),
+          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartPage())),
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(

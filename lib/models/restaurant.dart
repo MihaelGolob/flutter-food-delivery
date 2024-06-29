@@ -240,11 +240,13 @@ class Restaurant extends ChangeNotifier {
 
   List<FoodModel> get menu => _menu;
 
+  List<CartItem> get cart => _cart;
+
   List<FoodModel> getMenuByCategory(FoodCategory category) {
     return _menu.where((food) => food.category == category).toList();
   }
 
-  void addToCart(FoodModel food, List<FoodAddonModel> selectedAddons, int quantity) {
+  void addFoodToCart(FoodModel food, List<FoodAddonModel> selectedAddons, int quantity) {
     CartItem? cartItem = _cart.firstWhereOrNull((item) {
       bool isSameFood = item.food == food;
       bool hasSameAddons = const ListEquality().equals(item.selectedAddons, selectedAddons);
@@ -258,6 +260,48 @@ class Restaurant extends ChangeNotifier {
       _cart.add(CartItem(food: food, selectedAddons: selectedAddons, quantity: quantity));
     }
 
+    notifyListeners();
+  }
+
+  void addToCart(CartItem cartItem) {
+    int itemIndex = _cart.indexOf(cartItem);
+    if (itemIndex == -1) {
+      _cart.add(cartItem);
+    } else {
+      _cart[itemIndex].quantity += 1;
+    }
+
+    notifyListeners();
+  }
+
+  void removeFromCart(CartItem cartItem) {
+    int itemIndex = _cart.indexOf(cartItem);
+    if (itemIndex == -1) return;
+
+    _cart[itemIndex].quantity -= 1;
+
+    if (_cart[itemIndex].quantity == 0) {
+      _cart.removeAt(itemIndex);
+    }
+
+    notifyListeners();
+  }
+
+  double getTotalPrice() {
+    return _cart.fold(0, (sum, item) => sum + item.totalPrice);
+  }
+
+  int getTotalItemCount() {
+    int total = 0;
+    for (CartItem item in _cart) {
+      total += item.quantity;
+    }
+
+    return total;
+  }
+
+  void clearCart() {
+    _cart.clear();
     notifyListeners();
   }
 }
