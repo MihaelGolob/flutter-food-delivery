@@ -16,7 +16,7 @@ class CartPage extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Cart'),
+            title: const Text('Cart'),
             backgroundColor: Colors.transparent,
             foregroundColor: theme.inversePrimary,
             actions: [
@@ -24,7 +24,7 @@ class CartPage extends StatelessWidget {
                 onPressed: () => showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Are you sure you want to clear the cart?'),
+                    title: const Text('Are you sure you want to clear the cart?'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
@@ -40,7 +40,7 @@ class CartPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                icon: Icon(Icons.delete_outline),
+                icon: const Icon(Icons.delete_outline),
               ),
             ],
           ),
